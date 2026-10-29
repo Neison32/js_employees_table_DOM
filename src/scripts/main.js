@@ -93,8 +93,14 @@ newEmployeeForm.addEventListener('submit', (e) => {
     return;
   }
 
-  if (employeeName.trim().length < 4 || +age < 18 || +age > 90) {
-    showNotification('Invalid name or age', 'error');
+  if (employeeName.trim().length < 4) {
+    showNotification('Name must be at least 4 letters', 'error');
+
+    return;
+  }
+
+  if (+age < 18 || +age > 90) {
+    showNotification('Age must be between 18 and 90', 'error');
 
     return;
   }
@@ -142,9 +148,9 @@ let editingCell = null;
 tableBody.addEventListener('dblclick', (e) => {
   const td = e.target.closest('td');
 
-  // if (!td || editingCell) {
-  //   return;
-  // }
+  if (!td || editingCell) {
+    return;
+  }
 
   editingCell = td;
 
